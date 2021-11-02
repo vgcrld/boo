@@ -2,7 +2,13 @@ module github.com/vgcrld/boo
 
 go 1.17
 
-require github.com/gin-gonic/gin v1.7.4
+require (
+	github.com/davecgh/go-spew v1.1.1
+	github.com/gin-gonic/gin v1.7.4
+	github.com/maple-tech/go-hashify v0.0.0-20190813022824-dec87041b96c
+	github.com/pelletier/go-toml/v2 v2.0.0-beta.4
+	github.com/sirupsen/logrus v1.8.1
+)
 
 require (
 	github.com/gin-contrib/sse v0.1.0 // indirect
