@@ -8,7 +8,7 @@
 
 Star the container:
 
-`docker run --rm --name go -ti golang`
+`docker run -v ~/code3/boo:/go/boo --rm --name go -ti golang`
 
 Then in the container get vim:
 

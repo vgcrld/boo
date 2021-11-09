@@ -24,16 +24,11 @@ var home string = os.Getenv("HOME")
 
 func main() {
 
-	runOsCommand("mkdir", "-p", "/tmp/bob")
-	runOsCommand("touch", "/tmp/bob/file1")
-	runOsCommand("touch", "/tmp/bob/file2")
-	runOsCommand("touch", "/tmp/bob/file3")
-	runOsCommand("ls", "-l", "/tmp/bob")
-
-	// Write out some files
+	addCentOsVim()
 	writeOutFile(".vimrc", "files/vimrc")
-	writeOutFile("README.md", "files/README.md")
-	writeOutFile("HELP.md", "files/helpme.md")
+	addPathogen()
+	addNerdtree()
+
 }
 
 func writeOutFile(ofile, ifile string) {
@@ -45,6 +40,8 @@ func writeOutFile(ofile, ifile string) {
 }
 
 func runOsCommand(cmd string, args ...string) bool {
+
+	log.WithFields(log.Fields{"command": cmd}).Info("running command")
 	command := exec.Command(cmd, args...)
 	stdout, err := command.Output()
 	if err != nil {
@@ -52,4 +49,39 @@ func runOsCommand(cmd string, args ...string) bool {
 	}
 	fmt.Println(string(stdout))
 	return true
+
+}
+
+func addCentOsVim() {
+
+	if ok := runOsCommand("apt-get", "update"); ok {
+		runOsCommand("apt-get", "install", "-y", "vim")
+	} else {
+		panic("unable to add vim with apt-get")
+	}
+
+}
+
+func addPathogen() {
+
+	if ok := runOsCommand("mkdir", "-p", filepath.Join(home, ".vim/autoload"), filepath.Join(home, ".vim/bundle")); ok {
+		runOsCommand("curl", "-LSso", filepath.Join(home, ".vim/autoload/pathogen.vim"), "https://tpo.pe/pathogen.vim")
+	} else {
+		panic("unable to add pathogen")
+	}
+
+}
+
+func addNerdtree() {
+
+	nerdtreeCmd := []string{
+		"clone",
+		"https://github.com/preservim/nerdtree.git",
+		filepath.Join(home, ".vim/bundle/nerdtree"),
+	}
+	ok := runOsCommand("git", nerdtreeCmd...)
+	if !ok {
+		panic("unable to add pathogen")
+	}
+
 }
