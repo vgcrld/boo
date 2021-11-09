@@ -4,6 +4,9 @@
 * Install pathogen
 * Install nerdtree
 
+This stuff has been added to dotfiles.go but has been
+added here for reference.
+
 ## Make the container
 
 Star the container:
@@ -13,7 +16,6 @@ Star the container:
 Then in the container get vim:
 
 `apt-get update && apt-get install -y vim`
-
 
 ## Install pathogen
 
