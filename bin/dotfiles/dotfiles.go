@@ -57,7 +57,8 @@ func addCentOsVim() {
 	if ok := runOsCommand("apt-get", "update"); ok {
 		runOsCommand("apt-get", "install", "-y", "vim")
 	} else {
-		panic("unable to add vim with apt-get")
+		msg := "unable to add vim with apt-get"
+		log.WithFields(log.Fields{"command": "apt-get", "params": "update"}).Info(msg)
 	}
 
 }
@@ -67,7 +68,8 @@ func addPathogen() {
 	if ok := runOsCommand("mkdir", "-p", filepath.Join(home, ".vim/autoload"), filepath.Join(home, ".vim/bundle")); ok {
 		runOsCommand("curl", "-LSso", filepath.Join(home, ".vim/autoload/pathogen.vim"), "https://tpo.pe/pathogen.vim")
 	} else {
-		panic("unable to add pathogen")
+		msg := "can not make directories"
+		log.WithFields(log.Fields{"command": "mkdir"}).Info(msg)
 	}
 
 }
@@ -81,7 +83,8 @@ func addNerdtree() {
 	}
 	ok := runOsCommand("git", nerdtreeCmd...)
 	if !ok {
-		panic("unable to add pathogen")
+		msg := "unable to git clone nerdtree"
+		log.WithFields(log.Fields{"command": "git clone"}).Info(msg)
 	}
 
 }
