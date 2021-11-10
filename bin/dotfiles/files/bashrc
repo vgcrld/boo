@@ -1,0 +1,4 @@
+set -o vi
+
+alias ll='ls $LS_OPTIONS -l'
+

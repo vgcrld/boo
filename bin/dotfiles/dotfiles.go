@@ -25,13 +25,15 @@ var home string = os.Getenv("HOME")
 func main() {
 
 	addCentOsVim()
-	writeOutFile(".vimrc", "files/vimrc")
+	writeHomeFile(".vimrc", "files/vimrc")
+	writeHomeFile(".bashrc", "files/bashrc")
 	addPathogen()
 	addNerdtree()
 
 }
 
-func writeOutFile(ofile, ifile string) {
+func writeHomeFile(ofile, ifile string) {
+
 	path := filepath.Join(home, ofile)
 	log.WithFields(log.Fields{"filepath": path}).Info("writing the .vimrc file")
 	vimrc, _ := files.ReadFile(ifile)
