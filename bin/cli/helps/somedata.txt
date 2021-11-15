@@ -1,0 +1,8 @@
+    +---------------------------------------------------------------+
+    | This is some data.                                            |
+    | and you get it from embed.                                    |
+    | which i freaking love.                                        |
+    | The entire executable can have everything embeded.            |
+    | no linked or shared libraries.                                |
+    +---------------------------------------------------------------+
+    
