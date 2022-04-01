@@ -21,9 +21,11 @@ docker run -ti --rm golang
 In the container, run this go command:
 
 Install the **markdown** command
+
 `go install github.com/vgcrld/boo/bin/markdown@HEAD`
 
 or Install the **httpd** command right from this command:
+
 `go install github.com/vgcrld/boo/bin/httpd@HEAD`
 
 It so great. What happens is that the go command fetches and compiles
