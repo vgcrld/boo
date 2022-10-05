@@ -3,7 +3,7 @@
 This little Go app embeds everything you need for a webserver
 into a single package/executable.
 
-This was code yonked from the following [website](https://hackandsla.sh/posts/2021-06-18-embed-vuejs-in-go/#updates)
+This was code yoinked from the following [website](https://hackandsla.sh/posts/2021-06-18-embed-vuejs-in-go/#updates)
 ## Build
 
 First, `cd hackerlaw/frontend` and run
