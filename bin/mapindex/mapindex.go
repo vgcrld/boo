@@ -6,7 +6,6 @@ package main
 import (
 	"fmt"
 
-	"github.com/davecgh/go-spew/spew"
 	"github.com/maple-tech/go-hashify"
 )
 
@@ -24,20 +23,30 @@ func main() {
 	a1 := Address{"Pam", "Dehradun", 2200}
 	a3 := Address{Name: "Sam", city: "Lucknow", Pincode: 1070}
 
-	// Declaring a map
+	// Declaring a map, baby
 	var mp map[Address]int
 
 	// Checking if the map is empty or not
 	if mp == nil {
-		fmt.Println("True")
+		// fmt.Println("True")
 	} else {
-		fmt.Println("False")
+		// fmt.Println("False")
 	}
 	// Declaring and initialising
 	// using map literals
 	sample := map[Address]int{a1: 1, a2: 2, a3: 3}
-	spew.Dump(sample)
+	// spew.Dump(sample)
+	for i, _ := range sample {
+		fmt.Println(i)
+	}
 
-	hash, _ := hashify.SHA1String(sample)
+	// hash is a thing that is a thing.
+	// if you doc with var x T then you get this
+	// help code in popup on vscode.
+	var hash string
+	hash, _ = hashify.SHA1String(sample)
 	fmt.Println(hash)
+
+	fmt.Printf(hash)
+
 }
