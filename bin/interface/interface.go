@@ -46,6 +46,8 @@ func (d *Dog) Walk() {
 func main() {
 
 	icom.HELLO()
+	hold := icom.NewHolder()
+	hold.Code = 1
 
 	hh := icom.NewHolder()
 	hh.Name = "Richard"
@@ -73,4 +75,20 @@ func main() {
 	a.Talk()
 	a.Walk()
 
+	var aa []Animator
+	// aa = append(aa, &p, &d, &p, &p, &p)
+	aa = append(
+		aa,
+		&Dog{Name: "Spot"},
+	)
+	for _, x := range aa {
+		switch v := x.(type) {
+		case *Dog:
+			fmt.Println("The name is")
+			fmt.Println(v.Name)
+		}
+		fmt.Printf("%T\n", x)
+		x.Talk()
+		x.Walk()
+	}
 }
