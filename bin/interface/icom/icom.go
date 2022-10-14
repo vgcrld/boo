@@ -18,6 +18,7 @@ func NewHolder() Holder {
 	}
 }
 
+// Let's say Hello
 func HELLO() {
 	fmt.Println("hello, people")
 }

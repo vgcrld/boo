@@ -46,11 +46,12 @@ func (d *Dog) Walk() {
 func main() {
 
 	icom.HELLO()
-	hold := icom.NewHolder()
-	hold.Code = 1
 
 	hh := icom.NewHolder()
 	hh.Name = "Richard"
+	hh.Age = 52
+	hh.Address = "13 Lovalee Lane"
+	hh.Code = 14
 	fmt.Printf("%T: Name=%v\n", hh, hh.Name)
 
 	// We create the interface
