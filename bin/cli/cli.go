@@ -4,12 +4,12 @@ package main
 
 	The docu for this jawn can be found: https://github.com/urfave/cli/blob/v2.3.0/docs/v2/manual.md
 
-	It's kind of confusing. But go is not the easiest to
+	It's kind of confusing. But go is not the easiest to flow-follow...
 
 */
 
 import (
-	"embed"
+	"embed" // love this
 	"fmt"
 	"log"
 	"os"
@@ -20,9 +20,22 @@ import (
 //go:embed helps/*
 var files embed.FS
 
+var read cli.Command = cli.Command{
+	Name:        "read",
+	Description: "read some stuff",
+}
+
 func main() {
 	app := &cli.App{
 		Action: actionFunc,
+		Name:   "momifier",
+		Description: `
+	this is some 
+	stuff that 
+	does some stuff
+	--------
+	congratulations
+	`,
 	}
 
 	err := app.Run(os.Args)

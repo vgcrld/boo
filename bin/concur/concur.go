@@ -9,15 +9,72 @@ import (
 )
 
 var (
-	wg sync.WaitGroup
+	wg         sync.WaitGroup
+	workerWait sync.WaitGroup
 )
 
-func main() {
-	// runTickers()
+type lambda struct {
+	val      int
+	name     string
+	function func(i int) int
+}
 
-	channelExampleWithStruct()
+func main() {
+
+	// runTickers()
+	// channelExampleWithStruct()
 	// channelExampleBasic()
 	// channelExampleWithGoRoutine()
+	// common.PrintSomeRandomeSlices()
+
+	channelWorker()
+
+	// r := common.RandomeSizeIntSlice(10)
+	// fmt.Println(r)
+}
+
+func goWorker(c chan lambda) {
+	fmt.Println("Starting Working Go routine...")
+	for {
+		val := <-c
+		result := val.function(val.val)
+		fmt.Printf("Do the math: %v%v%v=%v\n", val.val, val.name, val.val, result)
+	}
+}
+
+func sum(i int) int {
+	r := i + i
+	return r
+}
+
+func times(i int) int {
+	return i * i
+}
+
+func channelWorker() {
+
+	// Our Queue is a type lambda
+	var queue chan lambda
+	queue = make(chan lambda)
+
+	workerWait.Add(3)
+	go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+	// go goWorker(queue)
+
+	for i := 0; i < 1e3; i++ {
+		queue <- lambda{val: i, name: "+", function: sum}
+		queue <- lambda{val: i, name: "*", function: times}
+	}
+
+	fmt.Println("We are done here")
 
 }
 
@@ -62,7 +119,6 @@ func channelExampleWithStruct() {
 		fmt.Println(val.Students)
 
 	}
-
 }
 
 // use channel in a go routine. channels block so you have
