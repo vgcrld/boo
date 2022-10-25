@@ -37,8 +37,8 @@ func goWorker(c chan lambda) {
 	fmt.Println("Starting Working Go routine...")
 	for {
 		val := <-c
-		result := val.function(val.val)
-		fmt.Printf("Do the math: %v%v%v=%v\n", val.val, val.name, val.val, result)
+		val.function(val.val)
+		// fmt.Printf("Do the math: %v%v%v=%v\n", val.val, val.name, val.val, result)
 	}
 }
 
@@ -57,24 +57,19 @@ func channelWorker() {
 	var queue chan lambda
 	queue = make(chan lambda)
 
-	workerWait.Add(3)
-	go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
-	// go goWorker(queue)
+	for c := 0; c < 3; c++ {
+		workerWait.Add(1)
+		go goWorker(queue)
 
-	for i := 0; i < 1e3; i++ {
+	}
+
+	st := time.Now()
+	for i := 0; i < 1e7; i++ {
 		queue <- lambda{val: i, name: "+", function: sum}
 		queue <- lambda{val: i, name: "*", function: times}
 	}
 
-	fmt.Println("We are done here")
+	fmt.Println("We are done here:", time.Now().Sub(st))
 
 }
 
@@ -158,6 +153,9 @@ func channelExampleWithGoRoutine() {
 func channelExampleBasic() {
 	// Super simple. Make, add, pull off end.
 	// a channel can send and receive. <-channel (send), channel<- (receive)
+	// this only works in the main go routine because it is buffered (10)
+	// the minute the buffer is full (default 1) to main go will wait until
+	// something pulls it off the queue.
 	queue := make(chan string, 10)
 	defer close(queue)
 	queue <- "My name is rich"

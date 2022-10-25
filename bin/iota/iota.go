@@ -15,9 +15,9 @@ const (
 )
 
 // It gets reset here.
-const xx = iota
+const newIota = iota
 
 func main() {
-	fmt.Println(KiB, MiB, GiB, TiB, PiB)
-	fmt.Println(xx)
+	fmt.Printf("KiB=%v, MiB=%v, GiB=%v, TiB=%v, PiB=%v\n", KiB, MiB, GiB, TiB, PiB)
+	fmt.Println(newIota, "ioto is reset outside of the const")
 }
