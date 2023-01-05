@@ -1,47 +1,25 @@
 package main
 
 import (
+	"embed"
 	"fmt"
 	"net/http"
 )
 
+//go:embed public/*
+var files embed.FS
+
 func main() {
+
+	index, err := files.ReadFile("public/index.html")
+	if err != nil {
+		fmt.Println("this jawn didn't work")
+	}
+	// fmt.Print(string(index))
+	// os.Exit(1)
+
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, `
-            <html>
-            <head>
-                <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-grid.css">
-                <link rel="stylesheet" href="https://unpkg.com/ag-grid-community/dist/styles/ag-theme-alpine.css">
-            </head>
-            <body>
-                <div id="myGrid" class="ag-theme-alpine" style="height: 500px; width: 500px;"></div>
-                <script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.min.js"></script>
-                <script>
-                    var gridOptions = {
-                        columnDefs: [
-                            { headerName: "Make", field: "make" },
-                            { headerName: "Model", field: "model" },
-                            { headerName: "Price", field: "price" }
-                        ],
-                        rowData: [
-                            { make: "Toyota", model: "Celica", price: 35000 },
-                            { make: "Ford", model: "Mondeo", price: 32000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 },
-                            { make: "Porsche", model: "Boxter", price: 72000 }
-                        ]
-                    };
-                    var gridDiv = document.querySelector('#myGrid');
-                    new agGrid.Grid(gridDiv, gridOptions);
-                </script>
-            </body>
-            </html>
-        `)
+		fmt.Fprintf(w, string(index))
 	})
 	http.ListenAndServe(":8000", nil)
 }
