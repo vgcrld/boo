@@ -11,13 +11,13 @@ func main() {
 
 	url := "https://my.int.galileosuite.com/atsgroup/graphql"
 
-	payload := strings.NewReader("{\"query\":\"query {\\n  \\n  items(\\n    selector: [\\n      {\\n        types: [\\\"host\\\"]\\n      },{\\n        tags: [\\\"VMWAREHOST@LAYER\\\"]\\n      }\\n    ]\\n  ) {\\n    id\\n    label\\n    tags\\n  }\\n  \\n}\"}")
+	payload := strings.NewReader("{\"query\":\"query {  items( selector: [ { types: [\\\"host\\\"] },{ tags: [\\\"VMWAREHOST@LAYER\\\"] } ] ) { id label tags } }\"}")
 
 	req, _ := http.NewRequest("POST", url, payload)
 
 	req.Header.Add("Accept", "*/*")
 	req.Header.Add("User-Agent", "Thunder Client (https://www.thunderclient.com)")
-	req.Header.Add("X-Galileo-Token", "eyJzZWMiOiJhNDlmNzc1ZTM0NDFmZTNlZmZhODMxMzJlOTQwYWU3OSIsInR5cCI6InVzZXIiLCJrZXkiOiJiNjU2ZTY5ZmUwNmZkYjVjZmFiY2RmNmZkMGEwNjhhNSJ9")
+	req.Header.Add("X-Galileo-Token", "eyJzZWMiOiIyODE0MDc1YjI1OThhMjAyMGFiNTM3ZjBjODNjNTc1MSIsInR5cCI6InVzZXIiLCJrZXkiOiI3MTE0ZmM0NTQ4M2M1Mjg3NDQ5YTY2NmM5YjE0NGYzYiJ9")
 	req.Header.Add("Content-Type", "application/json")
 
 	res, _ := http.DefaultClient.Do(req)
