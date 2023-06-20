@@ -1,0 +1,7 @@
+.----------------------------------------------------------.
+| This program is designed to do some stuff.               |
+|                                                          |
+| It's a very helpful program that I think you will like.  |
+| Have fun and enjoy yourself.                             |
+|                                                          |
+'----------------------------------------------------------'

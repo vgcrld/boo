@@ -26,18 +26,12 @@ var read cli.Command = cli.Command{
 }
 
 func main() {
+	desc, _ := files.ReadFile("helps/description.txt")
 	app := &cli.App{
-		Action: actionFunc,
-		Name:   "momifier",
-		Description: `
-	this is some 
-	stuff that 
-	does some stuff
-	--------
-	congratulations
-	`,
+		Action:      actionFunc,
+		Name:        "momifier",
+		Description: string(desc),
 	}
-
 	err := app.Run(os.Args)
 	if err != nil {
 		log.Fatal(err)
