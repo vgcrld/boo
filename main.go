@@ -13,11 +13,10 @@ const (
 
 func main() {
 
+	// This is a slice of anonymous structs
 	xx := []struct {
-		// name of the user
 		name string
-		// age of the user
-		age int
+		age  int
 	}{
 		{name: "richard", age: 52},
 		{name: "susan", age: 52},
