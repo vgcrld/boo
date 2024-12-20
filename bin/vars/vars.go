@@ -24,4 +24,6 @@ func main() {
 	// result is bob
 	fmt.Println(someVar)
 
+	fmt.Println("guess what, I'm a string")
+
 }
