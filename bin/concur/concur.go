@@ -57,7 +57,7 @@ func channelWorker() {
 	var queue chan lambda
 	queue = make(chan lambda)
 
-	for c := 0; c < 3; c++ {
+	for range 3 {
 		workerWait.Add(1)
 		go goWorker(queue)
 
