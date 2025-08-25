@@ -13,8 +13,8 @@ var (
 )
 
 const (
-	threads  = 10
-	values   = 500
+	threads  = 50
+	values   = 50
 	max_time = 5000 // Maximum sleep time in milliseconds
 )
 
@@ -41,8 +41,7 @@ func fk(tname int) {
 	fmt.Printf("Starting goroutine %d\n", tname)
 	for n := range ch {
 		st := rand.Intn(max_time)
-		result := n * 2 // Example calculation
-		fmt.Printf("go%d Received: %d, sleeptime: %dms, calc: %d * 2 = %d\n", tname, n, st, n, result)
+		fmt.Printf("go%d Received: %d, sleeptime: %dms\n", tname, n, st)
 		time.Sleep(time.Duration(st) * time.Millisecond)
 	}
 	fmt.Printf("Goroutine %d finished\n", tname)
